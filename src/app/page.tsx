@@ -1,6 +1,7 @@
 import React from 'react'
 import Trips from './about/components/Trips'
 
+
 export const metadata = {
   title: 'About',
 }
