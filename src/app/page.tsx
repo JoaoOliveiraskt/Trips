@@ -1,17 +1,10 @@
-import React from 'react'
-import Trips from './about/components/Trips'
+"use client";
 
+export default function  Home() {
 
-export const metadata = {
-  title: 'About',
-}
-
-const Page = () => {
   return (
     <div>
-      <Trips/>
+      Hello World
     </div>
   )
 }
-
-export default Page;
