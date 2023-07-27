@@ -1,10 +1,9 @@
 "use client";
 
 export default function  Home() {
-
   return (
-    <div>
-      Hello World
-    </div>
+    <div className="bg-primaryDarker">
+
+     </div>
   )
 }
