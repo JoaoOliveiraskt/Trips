@@ -29,7 +29,7 @@ const Header = () => {
 
     {status !== 'authenticated' && (
         <button onClick={handleLoginClick} className='text-primary text-sm font-semibold'>
-          Sign In
+          Sign in
         </button>
     )}
 
@@ -37,12 +37,16 @@ const Header = () => {
       <div className='border-grayLight flex items-center gap-5 border border-solid rounded-3xl pl-4 py-1 pr-2 relative'>
         <AiOutlineMenu onClick={handleMenuClick} size={16} className='cursor-pointer'/>
 
-        <Image onClick={handleMenuClick} className='cursor-pointer rounded-full shadow-md' height={38} width={38} src={data.user.image!} alt={data.user.name!}/>
+        <Image onClick={handleMenuClick} className='cursor-pointer rounded-full shadow-md' height={30} width={30} src={data.user.image!} alt={data.user.name!}/>
 
         {menuIsOpen && (
-          <div className=' absolute top-14 left-0 w-full h-full bg-white rounded-3xl shadow-md flex flex-col justify-center items-center'>
+          <div className="absolute top-12 left-0 w-full h-full
+           bg-white rounded-3xl shadow-md flex flex-col justify-center 
+           items-center border border-grayLight 
+           animate-in zoom-in slide-in-from-top-8 duration-400 ">
+            
             <button onClick={handleLogoutClick} className='text-primary text-sm font-semibold'>
-              Sign Out
+              Sign out
             </button>
           </div>
         )}
