@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <div className='container mx-auto p-5 py-0 h-[93px] rounded-3xl flex justify-between items-center'>
       <div className="relative h-[32px] w-[182px]">
-        <Image src="/logotipo.png" alt='logo da full stack trip' fill/>
+        <Image src="/logotipo.png" alt='logo da full stack trip' fill sizes="(max-width: )" />
       </div>
 
 
@@ -57,4 +57,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Header;
