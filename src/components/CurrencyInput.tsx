@@ -26,4 +26,4 @@ function CurrencyInput({ className, error, errorMessage, ...props }: InputProps)
   );
 }
 
-export default CurrencyInput;
+export default CurrencyInput

@@ -6,13 +6,13 @@ import Button from "@/components/Button";
 
 const TripSearch = () => {
   return (
-    <div className="container mx-auto p-5  bg-cover bg-center bg-no-repeat">
+    <div className="container mx-auto p-5 bg-search-bg bg-cover bg-center bg-no-repeat">
       <h2 className="font-semibold text-2xl text-primaryDark text-center">
         Encontre sua próxima <span className="text-primary">viagem!</span>
       </h2>
 
       <div className="flex flex-col gap-4 mt-5">
-        <Input placeholder="Onde vocçê quer ir?" />
+        <Input placeholder="Digite o destino" />
 
         <div className="flex gap-4">
           <DatePicker
@@ -29,4 +29,4 @@ const TripSearch = () => {
   );
 };
 
-export default TripSearch;
+export default TripSearch

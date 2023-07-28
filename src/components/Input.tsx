@@ -21,4 +21,4 @@ function Input({ className, error, errorMessage, ...props }: InputProps, ref: Le
   );
 }
 
-export default forwardRef(Input);
+export default forwardRef(Input)

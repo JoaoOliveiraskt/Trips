@@ -42,4 +42,4 @@ function DatePicker(
   );
 }
 
-export default forwardRef(DatePicker);
+export default forwardRef(DatePicker)
