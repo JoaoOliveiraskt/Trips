@@ -6,7 +6,12 @@ interface InputProps extends CurrencyInputProps {
   errorMessage?: string;
 }
 
-function CurrencyInput({ className, error, errorMessage, ...props }: InputProps) {
+function CurrencyInput({
+  className,
+  error,
+  errorMessage,
+  ...props
+}: InputProps) {
   const inputClassName = twMerge(
     "rounded-lg border border-gray-300 bg-white p-2 text-sm font-normal text-primaryDarker placeholder-black placeholder-opacity-20 outline-none transition-all focus:ring-1 focus:ring-primary",
     error ? "border-red-500" : "",
@@ -21,9 +26,11 @@ function CurrencyInput({ className, error, errorMessage, ...props }: InputProps)
         intlConfig={{ locale: "pt-BR", currency: "BRL" }}
         {...props}
       />
-      {error && errorMessage && <div className="mt-1 text-xs text-red-500">{errorMessage}</div>}
+      {error && errorMessage && (
+        <div className="mt-1 text-xs text-red-500">{errorMessage}</div>
+      )}
     </div>
   );
 }
 
-export default CurrencyInput
+export default CurrencyInput;

@@ -1,11 +1,12 @@
 import React from "react";
 
 interface HorizontalLineWithTextProps {
-    text: string;
+  text: string;
 }
-  
 
-const HorizontalSeparator: React.FC<HorizontalLineWithTextProps> = ({ text }) => {
+const HorizontalSeparator: React.FC<HorizontalLineWithTextProps> = ({
+  text,
+}) => {
   return (
     <div className="flex items-center">
       <div className="w-full h-[1px] bg-grayPrimary"></div>

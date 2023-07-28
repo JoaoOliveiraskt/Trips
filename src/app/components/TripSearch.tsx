@@ -29,4 +29,4 @@ const TripSearch = () => {
   );
 };
 
-export default TripSearch
+export default TripSearch;
