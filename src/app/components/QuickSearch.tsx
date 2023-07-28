@@ -1,14 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
+import HorizontalSeparator from '@/components/HorizontalSeparator'
 
 const QuickSearch = () => {
   return (
     <div className='container mx-auto p-5 '>
-        <div className="flex items-center">
-            <div className="w-full h-[2px] bg-grayPrimary"></div>
-            <h2 className="px-5 font-medium text-grayPrimary whitespace-nowrap">Tente pesquisar por</h2>
-            <div className="w-full h-[2px] bg-grayPrimary"></div>
-        </div>
+       <HorizontalSeparator text="Pesquise por"/>
 
         <div className="flex justify-between w-full mt-5">
             <div className="flex flex-col items-center gap-1">

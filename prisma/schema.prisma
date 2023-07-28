@@ -1,33 +1,34 @@
 model Trip {
-  id String @id @default(uuid())
-  name String 
-  location String
-  StartDate DateTime
-  EndDate DateTime
-  PricePerDay Decimal @db.Decimal(8,2)
-  description String
-  coverImage String
-  imagesUrl String[]
-  highlights String[]
-  maxGuests Int
-  reservations TripReservation[]
+  id            String            @id @default(uuid())
+  name          String
+  location      String
+  StartDate     DateTime
+  EndDate       DateTime
+  PricePerDay   Decimal           @db.Decimal(8, 2)
+  description   String
+  coverImage    String
+  imagesUrl     String[]
+  highlights    String[]
+  maxGuests     Int
+  reservations  TripReservation[]
+  countryCode   String
+  recommendated Boolean           @default(false)
 }
 
-
 model TripReservation {
-  id String @id @default(uuid())
-  tripId String
-  trip Trip @relation(fields: [tripId], references: [id])
-  userId String
-  user User @relation(fields: [userId], references: [id])
+  id        String   @id @default(uuid())
+  tripId    String
+  trip      Trip     @relation(fields: [tripId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
   StartDate DateTime
-  EndDate DateTime
-  totalPaid Decimal @db.Decimal(8,2)
+  EndDate   DateTime
+  totalPaid Decimal  @db.Decimal(8, 2)
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/d/migrate-shadow
 }
 
@@ -37,18 +38,18 @@ generator client {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -72,7 +73,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  reservations  TripReservation[]
+  reservations TripReservation[]
 }
 
 model VerificationToken {
