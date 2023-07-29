@@ -9,8 +9,8 @@ interface TripHeaderProps {
 
 const TripHeader = ({trip}: TripHeaderProps) => {
   return (
-    <div className='container'>
-        <div className="relative h-[300px] w-full">
+    <div className='flex flex-col'>
+        <div className="relative h-[300px] w-full lg:hidden">
         <Image
           src={trip.coverImage}
           alt={trip.name}
@@ -20,8 +20,8 @@ const TripHeader = ({trip}: TripHeaderProps) => {
       </div>
 
       {/* título e informações */}
-      <div className="flex flex-col">
-        <h2 className="text-semibold text-xl text-primaryDark">{trip.name}</h2>
+      <div className="flex flex-col  p-5 lg:order-1 lg:p-0 lg:mb-10">
+        <h2 className="text-semibold text-xl lg:text-3xl text-primaryDark">{trip.name}</h2>
 
         <div className="flex items-center gap-2 my-1">
           <ReactCountryFlag countryCode={trip.countryCode} svg />
