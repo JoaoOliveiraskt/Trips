@@ -1,18 +1,19 @@
 model Trip {
-  id            String            @id @default(uuid())
-  name          String
-  location      String
-  StartDate     DateTime
-  EndDate       DateTime
-  PricePerDay   Decimal           @db.Decimal(8, 2)
-  description   String
-  coverImage    String
-  imagesUrl     String[]
-  highlights    String[]
-  maxGuests     Int
-  reservations  TripReservation[]
-  countryCode   String
-  recommendated Boolean           @default(false)
+  id                  String            @id @default(uuid())
+  name                String
+  location            String
+  locationDescription String            @default("lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl nec ultricies ultrices, nunc nisl aliquam nunc, nec aliquam nunc nisl nec nisl.")
+  StartDate           DateTime
+  EndDate             DateTime
+  PricePerDay         Decimal           @db.Decimal(8, 2)
+  description         String
+  coverImage          String
+  imagesUrl           String[]
+  highlights          String[]
+  maxGuests           Int
+  reservations        TripReservation[]
+  countryCode         String
+  recommendated       Boolean           @default(false)
 }
 
 model TripReservation {
@@ -33,8 +34,8 @@ datasource db {
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  useMigrate      = true
+  provider   = "prisma-client-js"
+  useMigrate = true
 }
 
 model Account {
