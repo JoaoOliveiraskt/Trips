@@ -55,7 +55,7 @@ const Header = () => {
 
           {menuIsOpen && (
             <div
-              className="absolute top-12 left-0 w-full h-full
+              className="z-50 absolute top-12 left-0 w-full h-full
            bg-white rounded-3xl shadow-md flex flex-col justify-center 
            items-center border border-grayLight 
            animate-in zoom-in slide-in-from-top-8 duration-400"
