@@ -1,3 +1,5 @@
+"use client";
+
 import DatePicker from "@/components/DatePicker";
 import Input from "@/components/Input";
 import React from "react";
@@ -29,4 +31,4 @@ const TripSearch = () => {
   );
 };
 
-export default TripSearch;
+export default TripSearch

@@ -58,7 +58,7 @@ const Header = () => {
               className="absolute top-12 left-0 w-full h-full
            bg-white rounded-3xl shadow-md flex flex-col justify-center 
            items-center border border-grayLight 
-           animate-in zoom-in slide-in-from-top-8 duration-400 "
+           animate-in zoom-in slide-in-from-top-8 duration-400"
             >
               <button
                 onClick={handleLogoutClick}
