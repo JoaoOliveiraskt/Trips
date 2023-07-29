@@ -4,6 +4,7 @@ import React from "react";
 import { signOut, signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import { AiOutlineMenu } from "react-icons/ai";
+import Link from "next/link";
 
 const Header = () => {
   const [menuIsOpen, setMenuIsOpen] = React.useState(false);
@@ -18,6 +19,7 @@ const Header = () => {
 
   return (
     <div className="container mx-auto p-5 py-0 h-[93px] rounded-3xl flex justify-between items-center">
+      <Link href="/">   
       <div className="relative h-[32px] w-[182px]">
         <Image
           src="/logotipo.png"
@@ -26,6 +28,7 @@ const Header = () => {
           sizes="(max-width: )"
         />
       </div>
+      </Link>
 
       {status !== "authenticated" && (
         <button
