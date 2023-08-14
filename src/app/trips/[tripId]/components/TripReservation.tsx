@@ -9,10 +9,11 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 
 interface TripReservationProps {
+  tripId: string;
   tripStartDate: Date;
   tripEndDate: Date;
   maxGuests: number;
-  pricePerDay: number;
+  pricePerDay: Decimal;
 }
 
 interface TripReservationForm {
@@ -21,18 +22,63 @@ interface TripReservationForm {
   endDate: Date | null;
 }
 
-const TripReservation = ({ maxGuests, tripStartDate, tripEndDate, pricePerDay}: TripReservationProps) => {
+const TripReservation = ({
+  tripId,
+  maxGuests,
+  tripStartDate,
+  tripEndDate,
+  pricePerDay,
+}: TripReservationProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
     watch,
+    setError,
   } = useForm<TripReservationForm>();
 
-  const onSubmit = (data: any) => {
-    console.log({data});
+
+  const onSubmit = async (data: any) => {
+    const response = await fetch("http://localhost:3000/api/trips/check", {
+      method: "POST",
+      body: Buffer.from(
+        JSON.stringify({
+          startDate: data.startDate,
+          endDate: data.endDate,
+          tripId,
+        })
+      ),
+    });
+
+    const res = await response.json();
+
+    if (res?.error?.code === "TRIP_ALREADY_RESERVED") {
+      setError("startDate", {
+        type: "manual",
+        message: "Data de início já reservada.",
+      });
+
+      setError("endDate", {
+        type: "manual",
+        message: "Data final já reservada.",
+      });
+    }
+
+    if (res?.error?.code === "INVALID_START_DATE") {
+      setError("startDate", {
+        type: "manual",
+        message: "Data inválida.",
+      });
+
+    if (res?.error?.code === "INVALID_END_DATE") {
+        setError("endDate", {
+          type: "manual",
+          message: "Data inválida.",
+        });
+    }  
   };
+};
 
   const startDate = watch("startDate");
   const endDate = watch("endDate");
@@ -57,7 +103,7 @@ const TripReservation = ({ maxGuests, tripStartDate, tripEndDate, pricePerDay}: 
               errorMessage={errors?.startDate?.message}
               onChange={field.onChange}
               selected={field.value}
-              minDate={tripStartDate}
+              // minDate={tripStartDate}
             />
           )}
         />
@@ -102,7 +148,11 @@ const TripReservation = ({ maxGuests, tripStartDate, tripEndDate, pricePerDay}: 
       <div className="flex justify-between mt-3">
         <p className="text-medium text-sm text-primaryDarker">Total:</p>
         <p className="text-medium text-sm text-primaryDarker">
-          {startDate && endDate ? `R$${differenceInDays(endDate, startDate) * pricePerDay}` ?? 1 : "R$0"}
+          {startDate && endDate
+            ? `R$${
+                differenceInDays(endDate, startDate) * Number(pricePerDay)
+              }` ?? 1
+            : "R$0"}
         </p>
       </div>
 
