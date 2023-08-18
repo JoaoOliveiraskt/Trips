@@ -32,19 +32,23 @@ const TripConfirmation = ({ params }: { params: { tripId: String } }) => {
           endDate: searchParams.get("endDate"),
         }),
       });
-      const { trip, totalPrice } = await response.json();
-      
-      console.log(totalPrice)
 
-      setTrip(trip);
-      setTotalPrice(totalPrice);
+      const res = await response.json();
+
+      if (res?.error) {
+        return router.push("/")
+      }
+    
+      setTrip(res.trip);
+      setTotalPrice(res.totalPrice);
     };
 
-    if (status === "unauthenticated") 
-    router.push("/");
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
 
     fetchTrip();
-  }, [status]);
+  }, [status, searchParams, params, router]);
 
   if (!trip) return null;
 
@@ -87,7 +91,7 @@ const TripConfirmation = ({ params }: { params: { tripId: String } }) => {
 
         <div className="flex justify-between mt-1">
           <p className="text-primaryDark">Total:</p>
-          <p className="font-medium">R${totalPrice}</p>
+          <p className="font-medium">{`R$${totalPrice}`}</p>
         </div>
       </div>
 
