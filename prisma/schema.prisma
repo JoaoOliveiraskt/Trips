@@ -25,6 +25,7 @@ model TripReservation {
   StartDate DateTime
   EndDate   DateTime
   totalPaid Decimal  @db.Decimal(8, 2)
+  guests    Int      @default(5)
 }
 
 datasource db {
