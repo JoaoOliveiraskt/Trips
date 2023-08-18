@@ -17,17 +17,19 @@ const Header = () => {
 
   const handleMenuClick = () => setMenuIsOpen(!menuIsOpen);
 
+  const handleTripClick = () => {};
+
   return (
     <div className="container mx-auto p-5 py-0 h-[93px] rounded-3xl flex justify-between items-center">
-      <Link href="/">   
-      <div className="relative h-[32px] w-[182px]">
-        <Image
-          src="/logotipo.png"
-          alt="logo da full stack trip"
-          fill
-          sizes="(max-width: )"
-        />
-      </div>
+      <Link href="/">
+        <div className="relative h-[32px] w-[182px]">
+          <Image
+            src="/logotipo.png"
+            alt="logo da full stack trip"
+            fill
+            sizes="(max-width: )"
+          />
+        </div>
       </Link>
 
       {status !== "authenticated" && (
@@ -35,12 +37,12 @@ const Header = () => {
           onClick={handleLoginClick}
           className="text-primary text-sm font-semibold"
         >
-          Sign in
+          login
         </button>
       )}
 
       {status === "authenticated" && data.user && (
-        <div className="border-grayLight flex items-center gap-5 border border-solid rounded-3xl pl-4 py-1 pr-2 relative">
+        <div className="border-grayLight flex items-center gap-5 pl-4 py-1 pr-2 relative">
           <AiOutlineMenu
             onClick={handleMenuClick}
             size={16}
@@ -58,16 +60,22 @@ const Header = () => {
 
           {menuIsOpen && (
             <div
-              className="z-50 absolute top-12 left-0 w-full h-full
-           bg-white rounded-3xl shadow-md flex flex-col justify-center 
+              className="z-50 absolute top-12 left-0 w-full h-[100px]
+           bg-white rounded-xl shadow-md flex flex-col justify-center 
            items-center border border-grayLight 
            animate-in zoom-in slide-in-from-top-8 duration-400"
             >
+              <Link href="/my-trips">
+                <button className="text-primary text-sm font-semibold pb-2 border-grayLight border-b border-solid w-full text-center">
+                  Minhas viagens
+                </button>
+              </Link>
+
               <button
                 onClick={handleLogoutClick}
-                className="text-primary text-sm font-semibold"
+                className="text-primary text-sm font-semibold pt-2"
               >
-                Sign out
+                Logout
               </button>
             </div>
           )}
