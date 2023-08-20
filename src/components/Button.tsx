@@ -11,7 +11,7 @@ function Button({ className, variant = "primary", ...props }: ButtonProps) {
     outlined:
       "bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white",
     danger:
-      "text-red-500 border-red-500 border hover:bg-red-600 bg-transparent hover:text-white",
+      "text-red-500 border-red-500 border hover:bg-red-500 bg-transparent hover:text-white transition-ease-in-out duration-500 ",
   };
 
   const _className = twMerge(
