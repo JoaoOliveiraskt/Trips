@@ -5,12 +5,15 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Prisma, TripReservation } from "@prisma/client";
 import UserReservationItem from "./components/UserReservationItem";
+import Button from "@/components/Button";
+import Link from "next/link";
 
 const MyTrips = () => {
   const [reservations, setReservations] = useState<
-  Prisma.TripReservationGetPayload<{
-    include: { trip: true };
-}>[]>([]);
+    Prisma.TripReservationGetPayload<{
+      include: { trip: true };
+    }>[]
+  >([]);
 
   const { status, data } = useSession();
   const router = useRouter();
@@ -31,13 +34,22 @@ const MyTrips = () => {
     fetchReservations();
   }, [status]);
 
-  console.log({reservations});
+  console.log({ reservations });
 
   return (
     <div className="container mx-auto p-5">
       <h1 className="font-semibold text-primaryDark text-xl">Minhas Viagens</h1>
-      {reservations?.map(reservation => (<UserReservationItem key={reservation.id} reservation={reservation}/>))} 
-      
+      {reservations.length > 0 ? (
+        reservations?.map((reservation) => (
+          <UserReservationItem key={reservation.id} reservation={reservation} />
+        ))
+      ) : (
+        <div className="flex flex-col">
+                  <p className="text-primaryDark font-medium mt-2">Você ainda não possui nenhuma viagem! =(</p>
+                  <Link href="/">
+                  <Button className="bg-primaryDark mt-5 w-full">Fazer reserva</Button>
+                  </Link>
+        </div>     )}
     </div>
   );
 };

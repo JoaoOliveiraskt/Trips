@@ -65,7 +65,7 @@ const Header = () => {
            items-center border border-grayLight 
            animate-in zoom-in slide-in-from-top-8 duration-400"
             >
-              <Link href="/my-trips">
+              <Link href="/my-trips" onClick={() => setMenuIsOpen(false)}>
                 <button className="text-primary text-sm font-semibold pb-2 border-grayLight border-b border-solid w-full text-center">
                   Minhas viagens
                 </button>
