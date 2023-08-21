@@ -89,7 +89,10 @@ const TripReservation = ({
   const endDate = watch("endDate");
 
   return (
-    <div className="flex flex-col px-5">
+    <div className="flex flex-col px-5  tracking-wide">
+      <span className="font-semibold text-primaryDark mb-2">
+        Faça sua <span className="text-primary">reserva!</span>
+      </span>
       <div className="flex gap-4">
         <Controller
           name="startDate"
@@ -102,7 +105,7 @@ const TripReservation = ({
           control={control}
           render={({ field }) => (
             <DatePicker
-              className="w-full"
+              className="w-full  tracking-wide"
               placeholderText="Data de início"
               error={!!errors?.startDate}
               errorMessage={errors?.startDate?.message}
@@ -124,7 +127,7 @@ const TripReservation = ({
           control={control}
           render={({ field }) => (
             <DatePicker
-              className="w-full"
+              className="w-full  tracking-wide"
               placeholderText="Data final"
               error={!!errors?.endDate}
               errorMessage={errors?.endDate?.message}
@@ -150,7 +153,7 @@ const TripReservation = ({
         })}
         error={!!errors?.guests}
         errorMessage={errors?.guests?.message}
-        className="mt-4"
+        className="mt-4  tracking-wide"
         placeholder={`Número de hóspedes (max: ${maxGuests})`}
         type="number"
       />
