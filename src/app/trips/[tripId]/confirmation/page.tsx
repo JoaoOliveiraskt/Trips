@@ -13,13 +13,13 @@ import Button from "@/components/Button";
 
 import { Trip } from "@prisma/client";
 import { toast } from "react-toastify";
-
+import { loadStripe } from "@stripe/stripe-js";
 
 const TripConfirmation = ({ params }: { params: { tripId: String } }) => {
   const [trip, setTrip] = useState<Trip | null>();
   const [totalPrice, setTotalPrice] = useState<Number>(0);
 
-  const {status, data} = useSession();
+  const { status, data } = useSession();
   const router = useRouter();
 
   const searchParams = useSearchParams();
@@ -38,9 +38,9 @@ const TripConfirmation = ({ params }: { params: { tripId: String } }) => {
       const res = await response.json();
 
       if (res?.error) {
-        return router.push("/")
+        return router.push("/");
       }
-    
+
       setTrip(res.trip);
       setTotalPrice(res.totalPrice);
     };
@@ -55,30 +55,40 @@ const TripConfirmation = ({ params }: { params: { tripId: String } }) => {
   if (!trip) return null;
 
   const handleBuyClick = async () => {
-   const res = await fetch('http://localhost:3000/api/trips/reservation', {
-      method: 'POST',
+    const res = await fetch("http://localhost:3000/api/payment", {
+      method: "POST",
       body: Buffer.from(
         JSON.stringify({
           tripId: params.tripId,
           startDate: searchParams.get("startDate"),
           endDate: searchParams.get("endDate"),
           guests: Number(searchParams.get("guests")),
-          userId: (data?.user as any).id,
-          totalPaid: totalPrice,
+          totalPrice,
+          coverImage: trip.coverImage,
+          name: trip.name,
+          description: trip.description,
         })
       ),
     });
 
     if (!res.ok) {
-      return toast.error("Erro ao realizar reserva!", {position: "bottom-right"});
+      return toast.error("Erro ao realizar reserva!", {
+        position: "bottom-right",
+      });
     }
 
-    router.push("/");
-    
-    toast.success("Reserva realizada com sucesso!", {position: "bottom-right"});
+    const { sessionId } = await res.json();
 
+    const stripe = await loadStripe(
+      process.env.NEXT_PUBLIC_STRIPE_KEY as string
+    );
+
+    await stripe?.redirectToCheckout({ sessionId });
+
+    toast.success("Reserva realizada com sucesso!", {
+      position: "bottom-right",
+    });
   };
-          
 
   const startDate = new Date(searchParams.get("startDate") as string);
   const endDate = new Date(searchParams.get("endDate") as string);
@@ -115,7 +125,9 @@ const TripConfirmation = ({ params }: { params: { tripId: String } }) => {
           </div>
         </div>
 
-        <h3 className="font-semibold text-lg text-primaryDark mt-3">Informações sobre o preço</h3>
+        <h3 className="font-semibold text-lg text-primaryDark mt-3">
+          Informações sobre o preço
+        </h3>
 
         <div className="flex justify-between mt-1">
           <p className="text-primaryDark">Total:</p>
@@ -126,15 +138,17 @@ const TripConfirmation = ({ params }: { params: { tripId: String } }) => {
       <div className="flex flex-col mt-5 text-primaryDark pl-5">
         <h3 className="font-semibold">Data:</h3>
         <div className="flex gap-2 mt-1">
-        <p>{format(startDate,  "dd 'de' MMMM", {locale: ptBR})}</p>
-        {' - '}
-        <p>{format(endDate,  "dd 'de' MMMM", {locale: ptBR})}</p>
+          <p>{format(startDate, "dd 'de' MMMM", { locale: ptBR })}</p>
+          {" - "}
+          <p>{format(endDate, "dd 'de' MMMM", { locale: ptBR })}</p>
         </div>
 
         <h3 className="font-semibold mt-5">Hóspedes:</h3>
         <p>{guests} hóspedes</p>
 
-        <Button className="mt-5" onClick={handleBuyClick}>Finalizar compra</Button>
+        <Button className="mt-5" onClick={handleBuyClick}>
+          Finalizar compra
+        </Button>
       </div>
     </div>
   );
