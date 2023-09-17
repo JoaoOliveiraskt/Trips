@@ -30,13 +30,19 @@ Este projeto é um sistema de reservas de viagens que permite aos usuários rese
 
 **Clone o repositório:**
 
+```bash
 git clone https://github.com/JoaoOliveiraskt/Full-Stack-Trips.git
 cd Full-Stack-Trips
+```
 
 **Instale as dependências:**
 
+```bash
 npm install
+```
 
 ## Executando a Aplicação
 
+```bash
 npm run dev
+```
