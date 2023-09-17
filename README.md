@@ -1,6 +1,6 @@
 # Full Stack Trips
 
-**Bem-vindo ao repositório Full Stack Trips, um sofisticado sistema de reservas de viagens que aproveita uma variedade das mais recentes tecnologias.
+**Bem-vindo ao repositório Full Stack Trips, um sistema de reservas de viagens que aproveita uma variedade das mais recentes tecnologias.
 
 ## Descrição
 
